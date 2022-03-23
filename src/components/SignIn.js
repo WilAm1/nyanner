@@ -6,7 +6,6 @@ import styled from "styled-components";
 
 function SignIn() {
   const { handleSignIn, userStatus } = useContext(UserContext);
-
   const handleLoginClick = (e) => {
     e.preventDefault();
     console.log("I tried to login to google!");
@@ -19,9 +18,10 @@ function SignIn() {
     console.log("I tried to login as a guest!");
   };
 
-  return userStatus === "pending" ? (
-    <div>Pending</div>
-  ) : userStatus === "signed-out" ? (
+  if (userStatus === "pending") return <div>Pending</div>;
+  if (userStatus === "signed-in") return <Home />;
+
+  return (
     <div>
       <h2>Where people gather </h2>
       <div>
@@ -33,8 +33,6 @@ function SignIn() {
         </form>
       </div>
     </div>
-  ) : (
-    <Home />
   );
 }
 

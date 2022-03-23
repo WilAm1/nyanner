@@ -7,19 +7,20 @@ export const UserContext = createContext("something");
 export const CurrentUserContext = ({ children }) => {
   const [userDetails, setUserDetails] = useState();
   const [userStatus, setUserStatus] = useState("pending");
-
+  console.log(userStatus);
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log("iran");
       if (user) {
         const { displayName, email, photoURL, uid } = user;
         setUserDetails({ displayName, email, photoURL, uid });
-        if (!userStatus) {
+        if (userStatus !== "sign-in") {
           setUserStatus("signed-in");
           console.log(displayName);
-        } else {
-          setUserStatus("signed-out");
         }
+      } else {
+        setUserStatus("signed-out");
       }
     });
     return () => unsubscribe();
@@ -34,9 +35,7 @@ export const CurrentUserContext = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider
-      value={{ ...userDetails, isSignedIn: userStatus, handleSignIn }}
-    >
+    <UserContext.Provider value={{ ...userDetails, userStatus, handleSignIn }}>
       {children}
     </UserContext.Provider>
   );
