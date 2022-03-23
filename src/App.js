@@ -1,4 +1,4 @@
-import { BrowserRouter, Router, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./components/SignIn";
 
 // * High Level TODOS and MVP
@@ -17,9 +17,9 @@ import SignIn from "./components/SignIn";
 function App() {
   return (
     <BrowserRouter>
-      <Router>
+      <Routes>
         <Route path="/" element={<SignIn />} />
-      </Router>
+      </Routes>
     </BrowserRouter>
   );
 }
