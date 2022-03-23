@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { signInUser } from "../firebase.config";
-import Home from "./Home/Home";
 import styled from "styled-components";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function SignIn() {
   const { handleSignIn, userStatus } = useContext(UserContext);
+
   const handleLoginClick = (e) => {
     e.preventDefault();
     console.log("I tried to login to google!");
@@ -17,9 +18,6 @@ function SignIn() {
   const handleGuestClick = () => {
     console.log("I tried to login as a guest!");
   };
-
-  if (userStatus === "pending") return <div>Pending</div>;
-  if (userStatus === "signed-in") return <Home />;
 
   return (
     <div>

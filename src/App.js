@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import SignIn from "./components/SignIn";
+import { UserContext } from "./contexts/UserContext";
 
 // * High Level TODOS and MVP
 // *    Sign In / Sign Out
@@ -16,12 +17,30 @@ import SignIn from "./components/SignIn";
 // TODO Make mock api calls
 
 function App() {
+  const { userStatus } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    switch (userStatus) {
+      case "signed-in":
+        navigate("home");
+        break;
+      case "signed-out":
+        navigate("sign-in");
+        break;
+      default:
+        // navigate("*");
+        return;
+    }
+  }, [userStatus]);
+
   return (
     <Routes>
       {/* TODO Change later to redirect to home if already signed in. */}
       <Route path="/">
         <Route path="sign-in" element={<SignIn />} />
-        <Route path="home" element={<div>you are login</div>} />
+        <Route path="home" element={<div>you are logged-in</div>} />
+        <Route index element={<div>Pending...</div>} />
       </Route>
       <Route path="*" element={<div>Not Found</div>} />
     </Routes>
