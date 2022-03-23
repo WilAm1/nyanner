@@ -39,7 +39,7 @@ export const signOutUser = async () => {
   return result;
 };
 
-export const signInUser = () => {
+export const signInUser = async () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -48,7 +48,7 @@ export const signInUser = () => {
       // The signed-in user info.
       const user = result.user;
       console.log(user);
-      return { user, token };
+      return { user, token, isSigned: true };
       // ...
     })
     .catch((error) => {
@@ -56,7 +56,7 @@ export const signInUser = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
-      return { errorMessage, errorCode };
+      return { errorMessage, errorCode, isSigned: false };
       // ...
     });
 };

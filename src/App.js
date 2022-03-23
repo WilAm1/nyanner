@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import { UserContext } from "./contexts/UserContext";
+import Home from "./components/Home/Home";
 
 // * High Level TODOS and MVP
 // *    Sign In / Sign Out
@@ -10,7 +11,7 @@ import { UserContext } from "./contexts/UserContext";
 // *    Heart/Upvote liked tweets
 
 // * Working Log
-// TODO Default the path if no login found to Signin
+// * Default the path if no login found to Signin
 // TODO Have home component
 // TODO configure firebase
 // TODO configure context API for user auth
@@ -20,6 +21,7 @@ function App() {
   const { userStatus } = useContext(UserContext);
   const navigate = useNavigate();
 
+  //* Redirects to specific path based from userStatus
   useEffect(() => {
     switch (userStatus) {
       case "signed-in":
@@ -39,7 +41,7 @@ function App() {
       {/* TODO Change later to redirect to home if already signed in. */}
       <Route path="/">
         <Route path="sign-in" element={<SignIn />} />
-        <Route path="home" element={<div>you are logged-in</div>} />
+        <Route path="home" element={<Home />} />
         <Route index element={<div>Pending...</div>} />
       </Route>
       <Route path="*" element={<div>Not Found</div>} />
