@@ -18,7 +18,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        {/* TODO Change later to redirect to home if already signed in. */}
+        <Route path="/">
+          <Route index element={<SignIn />} />
+        </Route>
+        <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </BrowserRouter>
   );
