@@ -1,21 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import { UserContext } from "./contexts/UserContext";
 import Home from "./components/Home/Home";
 
 // * High Level TODOS and MVP
-// *    Sign In / Sign Out
+// ?    Sign In / Sign Out
 // *    Able to read,write,edit, and delete own tweets
 // *    Display the first 10 recent posts
 // *    Heart/Upvote liked tweets
 
 // * Working Log
-// * Default the path if no login found to Signin
-// TODO Have home component
-// TODO configure firebase
-// TODO configure context API for user auth
 // TODO Make mock api calls
+// TODO Fill up the home component
+// TODO connect the firestore to user accounts
 
 function App() {
   const { userStatus } = useContext(UserContext);
@@ -38,7 +36,6 @@ function App() {
 
   return (
     <Routes>
-      {/* TODO Change later to redirect to home if already signed in. */}
       <Route path="/">
         <Route path="sign-in" element={<SignIn />} />
         <Route path="home" element={<Home />} />

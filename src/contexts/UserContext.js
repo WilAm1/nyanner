@@ -1,4 +1,4 @@
-import { app, signInUser, signOutUser } from "../firebase.config";
+import { signInUser, signOutUser } from "../firebase.config";
 import { createContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -14,6 +14,7 @@ export const CurrentUserContext = ({ children }) => {
       if (user) {
         console.log("iran");
         const { displayName, email, photoURL, uid } = user;
+        // TODO get the user ref on db here.
         setUserDetails({ displayName, email, photoURL, uid });
         if (userStatus !== "sign-in") {
           setUserStatus("signed-in");

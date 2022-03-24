@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -31,7 +32,10 @@ const firebaseConfig = {
 // Initialize Firebase
 
 export const app = initializeApp(firebaseConfig);
+// Auth
 const provider = new GoogleAuthProvider();
+// Firestore
+const db = getFirestore(app);
 
 export const signOutUser = async () => {
   const auth = getAuth();
@@ -48,15 +52,17 @@ export const signInUser = async () => {
       // The signed-in user info.
       const user = result.user;
       console.log(user);
-      return { user, token, isSigned: true };
+      return { user, token };
       // ...
     })
     .catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-
-      return { errorMessage, errorCode, isSigned: false };
+      console.error(errorCode, errorMessage);
+      return { errorMessage, errorCode };
       // ...
     });
 };
+
+// Add query later here
