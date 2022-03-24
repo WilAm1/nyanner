@@ -5,6 +5,7 @@ import { UserContext } from "./contexts/UserContext";
 import Home from "./components/Home/Home";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import Profile from "./components/Profile";
 const GlobalStyles = createGlobalStyle`
   *{
     margin: 0;
@@ -54,6 +55,8 @@ function App() {
         <Route path="/">
           <Route path="sign-in" element={<SignIn />} />
           <Route path="home" element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+
           <Route index element={<div>Pending...</div>} />
         </Route>
         <Route path="*" element={<div>Not Found</div>} />

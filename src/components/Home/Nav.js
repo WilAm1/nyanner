@@ -29,14 +29,13 @@ function Nav() {
   console.log(photoURL);
   return (
     <StyledNav>
-      <h2>NavBar</h2>
-      {/* Logo */}
+      <h2>Logo</h2>
       <ul>
         <li>
-          <Link to="home">Home</Link>
+          <Link to="/home">Home</Link>
         </li>
         <li>
-          <Link to="profile">Profile</Link>
+          <Link to="/profile">Profile</Link>
         </li>
       </ul>
       <section>
