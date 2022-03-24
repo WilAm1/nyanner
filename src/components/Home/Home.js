@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "../Nav";
 import { posts } from "../../posts";
 import FeedList from "./FeedList";
 import ComposeMessage from "./ComposeMessage";

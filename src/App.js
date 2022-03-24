@@ -1,12 +1,10 @@
-import { useContext, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import { UserContext } from "./contexts/UserContext";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home/Home";
 import Profile from "./components/Profile";
-import NavHOC from "./components/MainHOC";
-import styled from "styled-components";
+import NavHOC from "./components/NavHOC";
+import IndexComponent from "./components/IndexComponent";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -20,6 +18,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: #eee;
   }
 `;
+
 // * High Level TODOS and MVP
 // ?    Sign In / Sign Out
 // *    Able to read,write,edit, and delete own tweets
@@ -32,35 +31,17 @@ const GlobalStyles = createGlobalStyle`
 // TODO connect the firestore to user accounts
 
 function App() {
-  const { userStatus } = useContext(UserContext);
-  const navigate = useNavigate();
-
-  //* Redirects to specific path based from userStatus
-  useEffect(() => {
-    switch (userStatus) {
-      case "signed-in":
-        navigate("home");
-        break;
-      case "signed-out":
-        navigate("sign-in");
-        break;
-      default:
-        // navigate("*");
-        return;
-    }
-  }, [userStatus]);
-
   return (
     <>
       <GlobalStyles />
       <Routes>
-        <Route path="/" element={<NavHOC />}>
-          <Route path="home" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-          <Route index element={<div>Pending...</div>} />
+        <Route index element={<IndexComponent />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route element={<NavHOC />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
         </Route>
 
-        <Route path="/sign-in" element={<SignIn />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </>

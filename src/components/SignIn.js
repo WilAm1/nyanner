@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
-import { signInUser } from "../firebase.config";
-import styled from "styled-components";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const { handleSignIn, userStatus } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleLoginClick = (e) => {
     e.preventDefault();
@@ -16,6 +15,13 @@ function SignIn() {
   const handleGuestClick = () => {
     console.log("I tried to login as a guest!");
   };
+
+  //* Redirects if already signed in
+  useEffect(() => {
+    if (userStatus === "signed-in") {
+      navigate("/home");
+    }
+  }, [userStatus]);
 
   return (
     <div>
