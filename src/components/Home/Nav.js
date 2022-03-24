@@ -5,7 +5,7 @@ import { UserContext } from "../../contexts/UserContext";
 function Nav() {
   const { userDetails, handleSignOut } = useContext(UserContext);
   const { photoURL, displayName } = userDetails || {
-    photoURL: "someting",
+    photoURL: "",
     displayName: "loading",
   };
   console.log(photoURL);
@@ -24,7 +24,7 @@ function Nav() {
       <section>
         {/* <button>new message~nya</button> */}
         <div>
-          <img src={photoURL} alt={"user-logo"} />
+          <img src={photoURL} alt={"user-logo"} referrerPolicy="no-referrer" />
           <span>{displayName}</span>
           <button onClick={handleSignOut}>Logout</button>
         </div>

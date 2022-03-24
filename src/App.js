@@ -3,7 +3,20 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import SignIn from "./components/SignIn";
 import { UserContext } from "./contexts/UserContext";
 import Home from "./components/Home/Home";
-
+import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
+const GlobalStyles = createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing:inherit;
+  }
+  body{
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eee;
+  }
+`;
 // * High Level TODOS and MVP
 // ?    Sign In / Sign Out
 // *    Able to read,write,edit, and delete own tweets
@@ -35,14 +48,17 @@ function App() {
   }, [userStatus]);
 
   return (
-    <Routes>
-      <Route path="/">
-        <Route path="sign-in" element={<SignIn />} />
-        <Route path="home" element={<Home />} />
-        <Route index element={<div>Pending...</div>} />
-      </Route>
-      <Route path="*" element={<div>Not Found</div>} />
-    </Routes>
+    <>
+      <GlobalStyles />
+      <Routes>
+        <Route path="/">
+          <Route path="sign-in" element={<SignIn />} />
+          <Route path="home" element={<Home />} />
+          <Route index element={<div>Pending...</div>} />
+        </Route>
+        <Route path="*" element={<div>Not Found</div>} />
+      </Routes>
+    </>
   );
 }
 
