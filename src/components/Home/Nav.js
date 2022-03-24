@@ -1,7 +1,25 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { UserContext } from "../../contexts/UserContext";
 
+const StyledProfile = styled.div`
+  display: flex;
+  .icon-wrapper {
+    width: 4rem;
+    height: 4rem;
+    img {
+      object-fit: contain;
+      width: 100%;
+      border-radius: 100%;
+    }
+  }
+`;
+const StyledNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
 function Nav() {
   const { userDetails, handleSignOut } = useContext(UserContext);
   const { photoURL, displayName } = userDetails || {
@@ -10,7 +28,7 @@ function Nav() {
   };
   console.log(photoURL);
   return (
-    <nav>
+    <StyledNav>
       <h2>NavBar</h2>
       {/* Logo */}
       <ul>
@@ -23,13 +41,21 @@ function Nav() {
       </ul>
       <section>
         {/* <button>new message~nya</button> */}
-        <div>
-          <img src={photoURL} alt={"user-logo"} referrerPolicy="no-referrer" />
-          <span>{displayName}</span>
-          <button onClick={handleSignOut}>Logout</button>
-        </div>
+        <StyledProfile>
+          <div className="icon-wrapper">
+            <img
+              src={photoURL}
+              alt={"user-logo"}
+              referrerPolicy="no-referrer"
+            />
+          </div>
+          <div>
+            <p>{displayName}</p>
+            <button onClick={handleSignOut}>Logout</button>
+          </div>
+        </StyledProfile>
       </section>
-    </nav>
+    </StyledNav>
   );
 }
 
