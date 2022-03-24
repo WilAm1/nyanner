@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext";
 
 const StyledProfile = styled.div`
   display: flex;

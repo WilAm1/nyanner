@@ -1,11 +1,13 @@
 import { useContext, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import SignIn from "./components/SignIn";
-import { UserContext } from "./contexts/UserContext";
-import Home from "./components/Home/Home";
-import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import { UserContext } from "./contexts/UserContext";
+import SignIn from "./components/SignIn";
+import Home from "./components/Home/Home";
 import Profile from "./components/Profile";
+import NavHOC from "./components/MainHOC";
+import styled from "styled-components";
+
 const GlobalStyles = createGlobalStyle`
   *{
     margin: 0;
@@ -52,13 +54,13 @@ function App() {
     <>
       <GlobalStyles />
       <Routes>
-        <Route path="/">
-          <Route path="sign-in" element={<SignIn />} />
+        <Route path="/" element={<NavHOC />}>
           <Route path="home" element={<Home />} />
           <Route path="profile" element={<Profile />} />
-
           <Route index element={<div>Pending...</div>} />
         </Route>
+
+        <Route path="/sign-in" element={<SignIn />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </>
