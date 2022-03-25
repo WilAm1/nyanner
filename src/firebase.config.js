@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 
-import { initializeApp } from "firebase/app";
+import { FirebaseError, initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -8,11 +8,13 @@ import {
   signOut,
 } from "firebase/auth";
 import {
+  addDoc,
   collection,
   doc,
   getFirestore,
   orderBy,
   query,
+  serverTimestamp,
   setDoc,
 } from "firebase/firestore";
 
@@ -43,12 +45,20 @@ export const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 // Firestore
 // TODO get the user profile from db query here
-const db = getFirestore(app);
+export const db = getFirestore(app);
 
 export const queryRecentPosts = query(
   collection(db, "posts"),
   orderBy("dateCreated")
 );
+
+export const publishUserPost = async (post) => {
+  await addDoc(collection(db, "posts"), {
+    ...post,
+    dateCreated: serverTimestamp(),
+  });
+  console.log("i push a message !");
+};
 
 export const signOutUser = async () => {
   const auth = getAuth();

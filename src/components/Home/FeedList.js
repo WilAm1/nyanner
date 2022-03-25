@@ -7,15 +7,19 @@ function FeedList() {
   const [feed, setFeed] = useState([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(queryRecentPosts, (querySnapshot) => {
-      const newFeed = [];
-      querySnapshot.forEach((post) => {
-        const { id } = post;
-        newFeed.push({ ...post.data(), id });
-        console.log({ ...post.data() });
-      });
-      setFeed(newFeed);
-    });
+    const unsubscribe = onSnapshot(
+      queryRecentPosts,
+      (querySnapshot) => {
+        const newFeed = [];
+        querySnapshot.forEach((snap) => {
+          const { id } = snap;
+          const post = snap.data({ serverTimestamps: "estimate" });
+          newFeed.push({ ...post, id });
+        });
+        setFeed(newFeed);
+      },
+      { includeMetadataChanges: true }
+    );
     return () => {
       unsubscribe();
     };

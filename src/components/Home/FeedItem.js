@@ -3,6 +3,7 @@ import React from "react";
 
 function FeedItem({ post: feedPost }) {
   const { post, dateCreated } = feedPost;
+  console.log(dateCreated);
   return (
     <li>
       <p>{post}</p>

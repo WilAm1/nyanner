@@ -1,6 +1,12 @@
 import { createContext, useEffect, useState } from "react";
-import { signInUser, signOutUser } from "../firebase.config";
+import {
+  db,
+  publishUserPost,
+  signInUser,
+  signOutUser,
+} from "../firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { addDoc, collection, doc } from "firebase/firestore";
 
 export const UserContext = createContext("something");
 
@@ -35,9 +41,19 @@ export const CurrentUserContext = ({ children }) => {
     setUserDetails(null);
   };
 
+  const addPost = async (postText) => {
+    const newUserPost = {
+      post: postText,
+      name: userDetails.displayName,
+      authorRef: doc(db, "users", userDetails.uid),
+    };
+    // TODO calls firebase method
+    publishUserPost(newUserPost);
+  };
+
   return (
     <UserContext.Provider
-      value={{ userDetails, userStatus, handleSignIn, handleSignOut }}
+      value={{ userDetails, userStatus, handleSignIn, handleSignOut, addPost }}
     >
       {children}
     </UserContext.Provider>
