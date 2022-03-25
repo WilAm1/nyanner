@@ -29,8 +29,10 @@ const GlobalStyles = createGlobalStyle`
 // * Working Log
 // ? Connect account to DB
 // * Read data from query snapshot and show it on feed
-// TODO Be able to write a post and publish it to /posts/userID
-// TODO
+// * Be able to write a post and publish it to /posts/userID
+// TODO fetch all posts from the user and show it to the user profile
+// TODO Add struture to /profile
+// TODO Add author and img association later (optional)
 
 function App() {
   return (

@@ -7,10 +7,10 @@ const StyledFixedHeader = styled.section`
   left: 0;
   width: 100%;
 `;
-function FixedHeader() {
+function FixedHeader({ title }) {
   return (
     <StyledFixedHeader>
-      <h4>Home</h4>
+      <h4>{title}</h4>
     </StyledFixedHeader>
   );
 }

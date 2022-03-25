@@ -44,7 +44,6 @@ export const app = initializeApp(firebaseConfig);
 // Auth
 const provider = new GoogleAuthProvider();
 // Firestore
-// TODO get the user profile from db query here
 export const db = getFirestore(app);
 
 export const queryRecentPosts = query(
@@ -72,7 +71,6 @@ export const signInUser = async () => {
       // // This gives you a Google Access Token. You can use it to access the Google API.
       // const credential = GoogleAuthProvider.credentialFromResult(result);
       // const token = credential.accessToken;
-      // TODO set the db later to add user to db if it does not exists
       const user = result.user;
       const { uid: id, displayName: name, photoURL } = user;
       setDoc(
@@ -82,16 +80,11 @@ export const signInUser = async () => {
       );
       console.log("SIGNED IN");
       return user;
-      // ...
     })
     .catch((error) => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error(errorCode, errorMessage);
       return { errorMessage, errorCode };
-      // ...
     });
 };
-
-// Add query later here

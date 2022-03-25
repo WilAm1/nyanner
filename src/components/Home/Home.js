@@ -2,7 +2,7 @@ import React from "react";
 import FeedList from "./FeedList";
 import ComposeMessage from "./ComposeMessage";
 import styled from "styled-components";
-import FixedHeader from "./FixedHeader";
+import FixedHeader from "../FixedHeader";
 
 const StyledFeed = styled.div`
   position: relative;
@@ -11,7 +11,7 @@ const StyledFeed = styled.div`
 function Home() {
   return (
     <StyledFeed>
-      <FixedHeader />
+      <FixedHeader title="HOME" />
       <ComposeMessage />
       <FeedList />
     </StyledFeed>
