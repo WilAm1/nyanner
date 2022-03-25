@@ -21,17 +21,21 @@ const GlobalStyles = createGlobalStyle`
 
 // * High Level TODOS and MVP
 // ?    Sign In / Sign Out
-// *    Able to read,write,edit, and delete own tweets
-// *    Display the first 10 recent posts
+// ?    Able to read,write,edit, and delete own tweets
+// ?    Display the recent posts
 //    * Have recent posts on top when new posts arrived...
 // *    Heart/Upvote liked tweets
 
 // * Working Log
 // ? Connect account to DB
-// TODO Add Delete button
-// TODO Add struture to /profile
+// * Add struture to /profile
+// * Add Delete button
+// TODO Guest functionality
 // TODO decouple FeedList
 // TODO Add custom hook
+// TODO Style the rest
+// TODO Refactor
+// TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed
 // TODO Add author and img association later (optional)
 
