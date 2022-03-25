@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
+import IndexComponent from "./IndexComponent";
 
 const StyledCoverBanner = styled.div`
   width: 100%;
@@ -21,11 +22,18 @@ const StyledProfileComponent = styled.div`
 `;
 
 function Profile() {
-  const {
-    userDetails: { displayName, email, photoURL },
-  } = useContext(UserContext);
+  const { userDetails, userStatus } = useContext(UserContext);
+  const { displayName, email, photoURL } = userDetails || {
+    displayName: null,
+    email: "guest@gmail",
+    photoURL: null,
+  };
+  // // ? Will redirect to index if not signed in
+  // if (userStatus !== "signed-in") return <IndexComponent />;
 
-  return (
+  return userStatus !== "signed-in" ? (
+    <IndexComponent />
+  ) : (
     <section>
       <FixedHeader title={displayName} />
       <StyledCoverBanner />
