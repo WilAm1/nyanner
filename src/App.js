@@ -27,10 +27,8 @@ const GlobalStyles = createGlobalStyle`
 // *    Heart/Upvote liked tweets
 
 // * Working Log
-// * Make mock api calls
-// * Fill up the home component
 // ? Connect account to DB
-// TODO Read data from query snapshot and show it on feed
+// * Read data from query snapshot and show it on feed
 // TODO Be able to write a post and publish it to /posts/userID
 // TODO
 

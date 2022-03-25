@@ -1,5 +1,4 @@
 import React from "react";
-import { posts } from "../../posts";
 import FeedList from "./FeedList";
 import ComposeMessage from "./ComposeMessage";
 import styled from "styled-components";
@@ -14,7 +13,7 @@ function Home() {
     <StyledFeed>
       <FixedHeader />
       <ComposeMessage />
-      <FeedList posts={posts} />
+      <FeedList />
     </StyledFeed>
   );
 }

@@ -7,7 +7,14 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { collection, getFirestore, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getFirestore,
+  orderBy,
+  query,
+  setDoc,
+} from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -52,14 +59,19 @@ export const signOutUser = async () => {
 export const signInUser = async () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
+      // // This gives you a Google Access Token. You can use it to access the Google API.
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
       // TODO set the db later to add user to db if it does not exists
       const user = result.user;
-      console.log(user);
-      return { user, token };
+      const { uid: id, displayName: name, photoURL } = user;
+      setDoc(
+        doc(db, "users", user.uid),
+        { id, name, photoURL },
+        { merge: true }
+      );
+      console.log("SIGNED IN");
+      return user;
       // ...
     })
     .catch((error) => {

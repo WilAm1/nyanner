@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { queryRecentPosts } from "../../firebase.config";
 import FeedItem from "./FeedItem";
 
-function FeedList({ posts }) {
+function FeedList() {
   const [feed, setFeed] = useState([]);
 
   useEffect(() => {
