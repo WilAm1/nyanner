@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
 import IndexComponent from "./IndexComponent";
+import { onSnapshot } from "firebase/firestore";
+import { queryUserPosts } from "../firebase.config";
+import FeedItem from "./Home/FeedItem";
 
 const StyledCoverBanner = styled.div`
   width: 100%;
@@ -20,16 +23,41 @@ const StyledProfileComponent = styled.div`
     }
   }
 `;
-
+// TODO Lift the state of Feedlist up!
 function Profile() {
   const { userDetails, userStatus } = useContext(UserContext);
-  const { displayName, email, photoURL } = userDetails || {
+  const { displayName, email, photoURL, uid } = userDetails || {
     displayName: null,
     email: "guest@gmail",
     photoURL: null,
   };
+  const [feed, setFeed] = useState([]);
+
   // // ? Will redirect to index if not signed in
   // if (userStatus !== "signed-in") return <IndexComponent />;
+  useEffect(() => {
+    console.log("UseEffect", uid);
+    if (!uid) return;
+    const query = queryUserPosts(uid);
+    console.log(query);
+    const unsubscribe = onSnapshot(
+      query,
+      (querySnapshot) => {
+        const newFeed = [];
+        querySnapshot.forEach((snap) => {
+          const { id } = snap;
+          const post = snap.data({ serverTimestamps: "estimate" });
+          newFeed.push({ ...post, id });
+        });
+        console.log(newFeed);
+        setFeed(newFeed);
+      },
+      { includeMetadataChanges: true }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return userStatus !== "signed-in" ? (
     <IndexComponent />
@@ -46,6 +74,11 @@ function Profile() {
           <p>{email}</p>
         </div>
       </StyledProfileComponent>
+      <ul>
+        {feed.map((post) => {
+          return <FeedItem key={post.id} post={post} />;
+        })}
+      </ul>
     </section>
   );
 }

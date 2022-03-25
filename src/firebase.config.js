@@ -16,6 +16,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  where,
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -50,6 +51,9 @@ export const queryRecentPosts = query(
   collection(db, "posts"),
   orderBy("dateCreated")
 );
+
+export const queryUserPosts = (id) =>
+  query(collection(db, "posts"), where("authorRef", "==", id));
 
 export const publishUserPost = async (post) => {
   await addDoc(collection(db, "posts"), {

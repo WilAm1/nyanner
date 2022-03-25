@@ -28,10 +28,11 @@ const GlobalStyles = createGlobalStyle`
 
 // * Working Log
 // ? Connect account to DB
-// * Read data from query snapshot and show it on feed
-// * Be able to write a post and publish it to /posts/userID
-// TODO fetch all posts from the user and show it to the user profile
+// TODO Add Delete button
 // TODO Add struture to /profile
+// TODO decouple FeedList
+// TODO Add custom hook
+// TODO Paginate data on feed
 // TODO Add author and img association later (optional)
 
 function App() {
