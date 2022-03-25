@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { collection, getFirestore, orderBy, query } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
@@ -35,7 +35,13 @@ export const app = initializeApp(firebaseConfig);
 // Auth
 const provider = new GoogleAuthProvider();
 // Firestore
+// TODO get the user profile from db query here
 const db = getFirestore(app);
+
+export const queryRecentPosts = query(
+  collection(db, "posts"),
+  orderBy("dateCreated")
+);
 
 export const signOutUser = async () => {
   const auth = getAuth();
@@ -50,6 +56,7 @@ export const signInUser = async () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       // The signed-in user info.
+      // TODO set the db later to add user to db if it does not exists
       const user = result.user;
       console.log(user);
       return { user, token };

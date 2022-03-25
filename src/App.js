@@ -23,12 +23,16 @@ const GlobalStyles = createGlobalStyle`
 // ?    Sign In / Sign Out
 // *    Able to read,write,edit, and delete own tweets
 // *    Display the first 10 recent posts
+//    * Have recent posts on top when new posts arrived...
 // *    Heart/Upvote liked tweets
 
 // * Working Log
-// TODO Make mock api calls
-// TODO Fill up the home component
-// TODO connect the firestore to user accounts
+// * Make mock api calls
+// * Fill up the home component
+// ? Connect account to DB
+// TODO Read data from query snapshot and show it on feed
+// TODO Be able to write a post and publish it to /posts/userID
+// TODO
 
 function App() {
   return (

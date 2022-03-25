@@ -1,19 +1,31 @@
-import React from "react";
+import { onSnapshot } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { queryRecentPosts } from "../../firebase.config";
+import FeedItem from "./FeedItem";
 
 function FeedList({ posts }) {
-  // TODO get the user profile from db query here
+  const [feed, setFeed] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(queryRecentPosts, (querySnapshot) => {
+      const newFeed = [];
+      querySnapshot.forEach((post) => {
+        const { id } = post;
+        newFeed.push({ ...post.data(), id });
+        console.log({ ...post.data() });
+      });
+      setFeed(newFeed);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <section>
       <ul>
-        {posts.map((post) => {
-          const { text, from, date } = post;
-          return (
-            <li>
-              <p>{from}</p>
-              <p>{text}</p>
-              <span>{date}</span>
-            </li>
-          );
+        {feed.map((post) => {
+          return <FeedItem key={post.id} post={post} />;
         })}
       </ul>
     </section>
