@@ -49,7 +49,7 @@ export const db = getFirestore(app);
 
 export const queryRecentPosts = query(
   collection(db, "posts"),
-  orderBy("dateCreated")
+  orderBy("dateCreated", "desc")
 );
 
 export const queryUserPosts = (id) =>

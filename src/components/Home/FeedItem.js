@@ -7,7 +7,7 @@ function FeedItem({ post: feedPost }) {
   return (
     <li>
       <p>{post}</p>
-      <p>{dateCreated.toDate().getDay()}</p>
+      <p>{dateCreated.toDate().toDateString()}</p>
     </li>
   );
 }
