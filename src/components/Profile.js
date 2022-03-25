@@ -3,8 +3,8 @@ import { UserContext } from "../contexts/UserContext";
 import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
 import IndexComponent from "./IndexComponent";
-import { onSnapshot } from "firebase/firestore";
-import { queryUserPosts } from "../firebase.config";
+import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { db, queryUserPosts } from "../firebase.config";
 import FeedItem from "./Home/FeedItem";
 
 const StyledCoverBanner = styled.div`
@@ -59,6 +59,9 @@ function Profile() {
     };
   }, []);
 
+  const handleClick = async (id) => {
+    await deleteDoc(doc(db, "posts", id));
+  };
   return userStatus !== "signed-in" ? (
     <IndexComponent />
   ) : (
@@ -76,7 +79,11 @@ function Profile() {
       </StyledProfileComponent>
       <ul>
         {feed.map((post) => {
-          return <FeedItem key={post.id} post={post} />;
+          return (
+            <FeedItem key={post.id} post={post}>
+              <button onClick={() => handleClick(post.id)}>Delete Me!</button>
+            </FeedItem>
+          );
         })}
       </ul>
     </section>
