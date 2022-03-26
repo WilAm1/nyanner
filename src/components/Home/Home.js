@@ -13,12 +13,12 @@ const StyledFeed = styled.div`
 
 function Home() {
   const { feed } = useQueryPosts(queryRecentPosts);
-  const { addPost } = useContext(UserContext);
+  const { addPost, userStatus } = useContext(UserContext);
 
   return (
     <StyledFeed>
       <FixedHeader title="HOME" />
-      <ComposeMessage handleNewPost={addPost} />
+      {userStatus === "signed-in" && <ComposeMessage handleNewPost={addPost} />}
       <FeedList posts={feed} />
     </StyledFeed>
   );
