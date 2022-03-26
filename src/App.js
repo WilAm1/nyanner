@@ -30,13 +30,13 @@ const GlobalStyles = createGlobalStyle`
 // ? Connect account to DB
 // * Add struture to /profile
 // * Add Delete button
-// TODO Guest functionality
+// * Guest functionality
 // TODO decouple FeedList
 // TODO Add custom hook
-// TODO Style the rest
 // TODO Refactor
 // TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed
+// TODO Style the rest
 // TODO Add author and img association later (optional)
 
 function App() {
@@ -50,7 +50,6 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
         </Route>
-
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </>

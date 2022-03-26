@@ -4,8 +4,10 @@ import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db, queryUserPosts } from "../firebase.config";
-import FeedItem from "./Home/FeedItem";
-
+import FeedItem from "./FeedItem";
+import useQueryPosts from "./useQueryPosts";
+import FeedList from "./FeedList";
+import ProfileFeed from "./ProfileFeed";
 const StyledCoverBanner = styled.div`
   width: 100%;
   background-color: #6bd562d6;
@@ -25,38 +27,11 @@ const StyledProfileComponent = styled.div`
 // TODO Lift the state of Feedlist up!
 function Profile() {
   const { userDetails } = useContext(UserContext);
-  const { displayName, email, photoURL, uid } = userDetails || {
-    displayName: null,
-    email: "guest@gmail",
-    photoURL: null,
-  };
-  const [feed, setFeed] = useState([]);
-
-  // // ? Will redirect to index if not signed in
-  // if (userStatus !== "signed-in") return <IndexComponent />;
-  useEffect(() => {
-    console.log("UseEffect", uid);
-    if (!uid) return;
-    const query = queryUserPosts(uid);
-    console.log(query);
-    const unsubscribe = onSnapshot(
-      query,
-      (querySnapshot) => {
-        const newFeed = [];
-        querySnapshot.forEach((snap) => {
-          const { id } = snap;
-          const post = snap.data({ serverTimestamps: "estimate" });
-          newFeed.push({ ...post, id });
-        });
-        console.log(newFeed);
-        setFeed(newFeed);
-      },
-      { includeMetadataChanges: true }
-    );
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const { displayName, email, photoURL, uid } = userDetails;
+  const { feed } = useQueryPosts(() => {
+    console.log(uid);
+    return queryUserPosts(uid);
+  });
 
   const handleClick = async (id) => {
     await deleteDoc(doc(db, "posts", id));
@@ -75,15 +50,7 @@ function Profile() {
           <p>{email}</p>
         </div>
       </StyledProfileComponent>
-      <ul>
-        {feed.map((post) => {
-          return (
-            <FeedItem key={post.id} post={post}>
-              <button onClick={() => handleClick(post.id)}>Delete Me!</button>
-            </FeedItem>
-          );
-        })}
-      </ul>
+      <ProfileFeed posts={feed} handleClick={handleClick} />
     </section>
   );
 }

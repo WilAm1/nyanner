@@ -59,7 +59,7 @@ export const CurrentUserContext = ({ children }) => {
     const newUserPost = {
       post: postText,
       name: userDetails.displayName,
-      authorRef: userDetails.uid,
+      authorUID: userDetails.uid,
     };
     // TODO calls firebase method
     publishUserPost(newUserPost);

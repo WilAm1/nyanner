@@ -1,14 +1,23 @@
-import { onSnapshot } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { queryRecentPosts } from "../../firebase.config";
-import FeedItem from "./FeedItem";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
+import { db, queryUserPosts } from "../firebase.config";
 
-function FeedList() {
+const useQueryPosts = (query) => {
+  let q = query;
+  if (typeof query === "function") {
+    q = query();
+  }
   const [feed, setFeed] = useState([]);
-
+  console.log(q);
   useEffect(() => {
     const unsubscribe = onSnapshot(
-      queryRecentPosts,
+      q,
       (querySnapshot) => {
         const newFeed = [];
         querySnapshot.forEach((snap) => {
@@ -16,6 +25,7 @@ function FeedList() {
           const post = snap.data({ serverTimestamps: "estimate" });
           newFeed.push({ ...post, id });
         });
+        console.log(newFeed);
         setFeed(newFeed);
       },
       { includeMetadataChanges: true }
@@ -24,16 +34,7 @@ function FeedList() {
       unsubscribe();
     };
   }, []);
+  return { feed };
+};
 
-  return (
-    <section>
-      <ul>
-        {feed.map((post) => {
-          return <FeedItem key={post.id} post={post} />;
-        })}
-      </ul>
-    </section>
-  );
-}
-
-export default FeedList;
+export default useQueryPosts;

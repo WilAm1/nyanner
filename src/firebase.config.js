@@ -53,7 +53,7 @@ export const queryRecentPosts = query(
 );
 
 export const queryUserPosts = (id) =>
-  query(collection(db, "posts"), where("authorRef", "==", id));
+  query(collection(db, "posts"), where("authorUID", "==", id));
 
 export const publishUserPost = async (post) => {
   await addDoc(collection(db, "posts"), {
