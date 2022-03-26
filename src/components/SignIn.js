@@ -10,9 +10,9 @@ function SignIn() {
   const handleLoginClick = (e) => {
     e.preventDefault();
     console.log("I tried to login to google!");
-
     handleSignIn();
   };
+
   const handleGuestClick = () => {
     console.log("I tried to login as a guest!");
     handleGuestSignIn();

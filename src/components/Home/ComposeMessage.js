@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { UserContext } from "../../contexts/UserContext";
 
 const StyledComposeMessage = styled.form`
   display: flex;
@@ -12,14 +11,13 @@ const StyledComposeMessage = styled.form`
   }
 `;
 
-function ComposeMessage() {
+function ComposeMessage({ handleNewPost }) {
   const [text, setText] = useState("");
-  const { addPost } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO Add post to db
-    addPost(text);
+    handleNewPost(text);
+    setText("");
   };
 
   return (
@@ -30,7 +28,7 @@ function ComposeMessage() {
           value={text}
           onChange={(e) => setText(e.target.value)}
         ></textarea>
-        <button type="submit">Publish~nya</button>
+        <button type="submit">Post~nya</button>
       </StyledComposeMessage>
     </div>
   );

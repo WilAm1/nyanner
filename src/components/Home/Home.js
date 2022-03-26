@@ -1,9 +1,11 @@
+import { useContext } from "react";
+import { queryRecentPosts } from "../../firebase.config";
+import { UserContext } from "../../contexts/UserContext";
 import FeedList from "../FeedList";
 import ComposeMessage from "./ComposeMessage";
-import styled from "styled-components";
 import FixedHeader from "../FixedHeader";
-import { queryRecentPosts } from "../../firebase.config";
 import useQueryPosts from "../useQueryPosts";
+import styled from "styled-components";
 
 const StyledFeed = styled.div`
   position: relative;
@@ -11,10 +13,12 @@ const StyledFeed = styled.div`
 
 function Home() {
   const { feed } = useQueryPosts(queryRecentPosts);
+  const { addPost } = useContext(UserContext);
+
   return (
     <StyledFeed>
       <FixedHeader title="HOME" />
-      <ComposeMessage />
+      <ComposeMessage handleNewPost={addPost} />
       <FeedList posts={feed} />
     </StyledFeed>
   );
