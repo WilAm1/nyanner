@@ -1,12 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import {
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-} from "firebase/firestore";
-import { db, queryUserPosts } from "../firebase.config";
+import { useEffect, useState } from "react";
+import { onSnapshot } from "firebase/firestore";
 
 const useQueryPosts = (query) => {
   let q = query;
@@ -14,7 +7,6 @@ const useQueryPosts = (query) => {
     q = query();
   }
   const [feed, setFeed] = useState([]);
-  console.log(q);
   useEffect(() => {
     const unsubscribe = onSnapshot(
       q,
@@ -25,7 +17,7 @@ const useQueryPosts = (query) => {
           const post = snap.data({ serverTimestamps: "estimate" });
           newFeed.push({ ...post, id });
         });
-        console.log(newFeed);
+        // console.log(newFeed);
         setFeed(newFeed);
       },
       { includeMetadataChanges: true }

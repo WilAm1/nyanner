@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
-import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db, queryUserPosts } from "../firebase.config";
-import FeedItem from "./FeedItem";
 import useQueryPosts from "./useQueryPosts";
-import FeedList from "./FeedList";
 import ProfileFeed from "./ProfileFeed";
 const StyledCoverBanner = styled.div`
   width: 100%;
@@ -24,12 +22,11 @@ const StyledProfileComponent = styled.div`
     }
   }
 `;
-// TODO Lift the state of Feedlist up!
+
 function Profile() {
   const { userDetails } = useContext(UserContext);
   const { displayName, email, photoURL, uid } = userDetails;
   const { feed } = useQueryPosts(() => {
-    console.log(uid);
     return queryUserPosts(uid);
   });
 

@@ -11,6 +11,7 @@ const StyledComposeMessage = styled.form`
     width: 50%;
   }
 `;
+
 function ComposeMessage() {
   const [text, setText] = useState("");
   const { addPost } = useContext(UserContext);
