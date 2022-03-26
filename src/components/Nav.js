@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
 
@@ -27,9 +27,15 @@ function Nav() {
     photoURL: "",
     displayName: "Signing out",
   };
+  const navigate = useNavigate();
+  const handleUserSignOut = async () => {
+    await handleSignOut();
+    navigate("/sign-in");
+  };
   return (
     <StyledNav>
       <h2>Logo</h2>
+      <h4>Explore</h4>
       <ul>
         <li>
           <Link to="/home">Home</Link>
@@ -50,7 +56,7 @@ function Nav() {
           </div>
           <div>
             <p>{displayName}</p>
-            <button onClick={handleSignOut}>Logout</button>
+            <button onClick={handleUserSignOut}>Logout</button>
           </div>
         </StyledProfile>
       </section>

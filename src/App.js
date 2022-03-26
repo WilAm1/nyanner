@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import Profile from "./components/Profile";
 import NavHOC from "./components/NavHOC";
 import IndexComponent from "./components/IndexComponent";
+import CurrentUserProfile from "./components/CurrentUserProfile";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -31,13 +32,13 @@ const GlobalStyles = createGlobalStyle`
 // * Add struture to /profile
 // * Add Delete button
 // * Guest functionality
-// TODO decouple FeedList
-// TODO Add custom hook
+// * decouple FeedList
+// * Add custom hook
+// TODO Add author and img association later (optional)
 // TODO Refactor
 // TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed
 // TODO Style the rest
-// TODO Add author and img association later (optional)
 
 function App() {
   return (
@@ -48,7 +49,8 @@ function App() {
         <Route path="/sign-in" element={<SignIn />} />
         <Route element={<NavHOC />}>
           <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<CurrentUserProfile />} />
+          <Route path="/:id" element={<Profile />} />
         </Route>
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>

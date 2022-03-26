@@ -42,6 +42,7 @@ export const CurrentUserContext = ({ children }) => {
     }
     setUserDetails(null);
     setUserStatus("signed-out");
+    return true;
   };
 
   const handleGuestSignIn = () => {

@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db, queryUserPosts } from "../firebase.config";
 import useQueryPosts from "./useQueryPosts";
 import ProfileFeed from "./ProfileFeed";
-import FeedList from "./FeedList";
-import { useParams } from "react-router-dom";
 const StyledCoverBanner = styled.div`
   width: 100%;
   background-color: #6bd562d6;
@@ -25,24 +23,16 @@ const StyledProfileComponent = styled.div`
   }
 `;
 
-function Profile() {
-  // TODO Fetch the details of the user on the /users in db!
-  const params = useParams();
+function CurrentUserProfile() {
+  const { userDetails } = useContext(UserContext);
+  const { displayName, email, photoURL, uid } = userDetails;
   const { feed } = useQueryPosts(() => {
-    return queryUserPosts(params.id);
+    return queryUserPosts(uid);
   });
-  console.log("rian");
-  const [accountDetails, setAccountDetails] = useState(null);
-  const { photoURL, displayName, email } = accountDetails || {
-    photoURL: "",
-    displayName: "No User",
-    email: "",
+
+  const handleClick = async (id) => {
+    await deleteDoc(doc(db, "posts", id));
   };
-  useEffect(() => {
-    getDoc(doc(db, "users", params.id)).then((d) =>
-      setAccountDetails(d.data())
-    );
-  }, []);
 
   return (
     <section>
@@ -57,13 +47,9 @@ function Profile() {
           <p>{email}</p>
         </div>
       </StyledProfileComponent>
-      {feed.length ? (
-        <div>That user doesnt exist (lmao)</div>
-      ) : (
-        <FeedList posts={feed} />
-      )}
+      <ProfileFeed posts={feed} handleClick={handleClick} />
     </section>
   );
 }
 
-export default Profile;
+export default CurrentUserProfile;

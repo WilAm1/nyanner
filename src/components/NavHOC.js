@@ -12,9 +12,8 @@ const GridLayout = styled.div`
 
 function NavHOC() {
   const { userStatus } = useContext(UserContext);
-  return userStatus === "signed-out" ? (
-    <IndexComponent />
-  ) : (
+  console.log(userStatus);
+  return (
     <GridLayout>
       <Nav />
       <Outlet />
