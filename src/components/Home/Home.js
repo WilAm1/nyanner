@@ -9,6 +9,7 @@ const StyledFeed = styled.div`
 `;
 
 function Home() {
+  console.log("iran");
   return (
     <StyledFeed>
       <FixedHeader title="HOME" />

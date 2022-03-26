@@ -12,7 +12,7 @@ export const UserContext = createContext("something");
 
 export const CurrentUserContext = ({ children }) => {
   const [userDetails, setUserDetails] = useState();
-  const [userStatus, setUserStatus] = useState("pending");
+  const [userStatus, setUserStatus] = useState("signed-out");
 
   useEffect(() => {
     const auth = getAuth();
@@ -26,19 +26,33 @@ export const CurrentUserContext = ({ children }) => {
           setUserStatus("signed-in");
         }
       } else {
-        if (userStatus !== "signed-out") setUserStatus("signed-out");
+        setUserStatus("signed-out");
       }
     });
     return () => unsubscribe();
-  }, [userStatus]);
+  }, []);
 
   const handleSignIn = async () => {
     await signInUser();
   };
 
   const handleSignOut = async () => {
-    await signOutUser();
+    if (userStatus === "signed-in") {
+      await signOutUser();
+    }
     setUserDetails(null);
+    setUserStatus("signed-out");
+  };
+
+  const handleGuestSignIn = () => {
+    console.log("userContext comp", userStatus);
+    setUserStatus("guest");
+    setUserDetails({
+      displayName: "Guest",
+      email: "guestNyan@gmail.com",
+      photoURL: null,
+      uid: "guest",
+    });
   };
 
   const addPost = async (postText) => {
@@ -53,7 +67,14 @@ export const CurrentUserContext = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ userDetails, userStatus, handleSignIn, handleSignOut, addPost }}
+      value={{
+        userDetails,
+        userStatus,
+        handleSignIn,
+        handleSignOut,
+        addPost,
+        handleGuestSignIn,
+      }}
     >
       {children}
     </UserContext.Provider>

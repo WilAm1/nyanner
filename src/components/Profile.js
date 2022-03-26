@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/UserContext";
 import FixedHeader from "./FixedHeader";
 import styled from "styled-components";
-import IndexComponent from "./IndexComponent";
 import { deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db, queryUserPosts } from "../firebase.config";
 import FeedItem from "./Home/FeedItem";
@@ -25,7 +24,7 @@ const StyledProfileComponent = styled.div`
 `;
 // TODO Lift the state of Feedlist up!
 function Profile() {
-  const { userDetails, userStatus } = useContext(UserContext);
+  const { userDetails } = useContext(UserContext);
   const { displayName, email, photoURL, uid } = userDetails || {
     displayName: null,
     email: "guest@gmail",
@@ -62,9 +61,8 @@ function Profile() {
   const handleClick = async (id) => {
     await deleteDoc(doc(db, "posts", id));
   };
-  return userStatus !== "signed-in" ? (
-    <IndexComponent />
-  ) : (
+
+  return (
     <section>
       <FixedHeader title={displayName} />
       <StyledCoverBanner />

@@ -8,13 +8,14 @@ const IndexComponent = () => {
 
   //* Redirects to specific path based from userStatus
   useEffect(() => {
-    if (userStatus === "signed-in") navigate("/home");
+    console.log(userStatus);
+    if (userStatus === "signed-in" || userStatus === "guest") {
+      navigate("/home");
+    }
     if (userStatus === "signed-out") navigate("/sign-in");
-    if (userStatus === "guest") navigate("sign-in");
-    console.log("i was rendered, indexComponent");
   }, [userStatus]);
 
-  return <div>Pending... Please wait!</div>;
+  return <div>Pending... Please wait! {userStatus}</div>;
 };
 
 export default IndexComponent;

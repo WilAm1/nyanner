@@ -20,13 +20,13 @@ const StyledNav = styled.nav`
   flex-direction: column;
   justify-content: space-around;
 `;
+
 function Nav() {
   const { userDetails, handleSignOut } = useContext(UserContext);
   const { photoURL, displayName } = userDetails || {
     photoURL: "",
-    displayName: "loading",
+    displayName: "Signing out",
   };
-  console.log(photoURL);
   return (
     <StyledNav>
       <h2>Logo</h2>

@@ -3,7 +3,8 @@ import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
 function SignIn() {
-  const { handleSignIn, userStatus } = useContext(UserContext);
+  const { handleSignIn, userStatus, handleGuestSignIn } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLoginClick = (e) => {
@@ -14,11 +15,13 @@ function SignIn() {
   };
   const handleGuestClick = () => {
     console.log("I tried to login as a guest!");
+    handleGuestSignIn();
   };
 
   //* Redirects if already signed in
   useEffect(() => {
-    if (userStatus === "signed-in") {
+    console.log("Sign in ", userStatus);
+    if (userStatus === "signed-in" || userStatus === "guest") {
       navigate("/home");
     }
   }, [userStatus]);
