@@ -31,17 +31,17 @@ function Profile() {
   const { feed } = useQueryPosts(() => {
     return queryUserPosts(params.id);
   });
-  console.log("rian");
   const [accountDetails, setAccountDetails] = useState(null);
   const { photoURL, displayName, email } = accountDetails || {
     photoURL: "",
-    displayName: "No User",
+    displayName: "No User Found",
     email: "",
   };
   useEffect(() => {
-    getDoc(doc(db, "users", params.id)).then((d) =>
-      setAccountDetails(d.data())
-    );
+    getDoc(doc(db, "users", params.id)).then((d) => {
+      const details = d.data();
+      setAccountDetails(details);
+    });
   }, []);
 
   return (
@@ -57,11 +57,7 @@ function Profile() {
           <p>{email}</p>
         </div>
       </StyledProfileComponent>
-      {!feed.length ? (
-        <div>That user doesnt exist (lmao)</div>
-      ) : (
-        <FeedList posts={feed} />
-      )}
+      {!feed.length ? <div>Empty Feed...</div> : <FeedList posts={feed} />}
     </section>
   );
 }
