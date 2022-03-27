@@ -29,11 +29,11 @@ const GlobalStyles = createGlobalStyle`
 // *    Heart/Upvote liked tweets
 
 // * Working Log
+// TODO Style the rest
 // TODO Refactor
 // TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed
 // TODO Add Suspense on feed
-// TODO Style the rest
 
 function App() {
   const HomeWithRedirect = withSignOutRedirect(<Home />);
