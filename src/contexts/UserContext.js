@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import {
-  checkUserExist,
   fetchUserDetail,
   publishUserPost,
   signInUser,
@@ -82,6 +81,7 @@ export const CurrentUserContext = ({ children }) => {
     <UserContext.Provider
       value={{
         userDetails,
+        setUserStatus,
         userStatus,
         handleSignIn,
         handleSignOut,

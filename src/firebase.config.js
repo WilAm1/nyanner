@@ -89,12 +89,13 @@ export const signInUser = async () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       const user = result.user;
-      const { uid: id, displayName: name, photoURL } = user;
-      setDoc(
-        doc(db, "users", user.uid),
-        { id, name, photoURL },
-        { merge: true }
-      );
+      // const { uid: id, displayName: name, photoURL } = user;
+      // setDoc(
+      //   doc(db, "users", user.uid),
+      //   { id, name, photoURL },
+      //   { merge: true }
+      // );
+      console.log(user);
       console.log("SIGNED IN");
       return user;
     })
