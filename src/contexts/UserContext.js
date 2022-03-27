@@ -28,6 +28,10 @@ export const CurrentUserContext = ({ children }) => {
     }
   };
 
+  const changeSignIn = (details) => {
+    setUserDetails(details);
+    setUserStatus("signed-in");
+  };
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -83,8 +87,8 @@ export const CurrentUserContext = ({ children }) => {
     <UserContext.Provider
       value={{
         userDetails,
-        setUserStatus,
         userStatus,
+        changeSignIn,
         handleSignIn,
         handleSignOut,
         addPost,

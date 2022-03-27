@@ -1,6 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { db } from "../firebase.config";
@@ -10,7 +10,7 @@ function UserSetup() {
     userName: "",
     name: "",
   });
-  const { setUserStatus } = useContext(UserContext);
+  const { changeSignIn, userStatus } = useContext(UserContext);
   const navigate = useNavigate();
   const handleChange = (e) => {
     const inputName = e.target.name;
@@ -35,11 +35,19 @@ function UserSetup() {
         photoURL,
         ...signUpDetails,
       });
-      setUserStatus("signed-in");
-      navigate("/home");
+      changeSignIn({
+        ...signUpDetails,
+        uid,
+        email,
+        photoURL,
+      });
     }
   };
   // TODO Add form handler on userName
+  useEffect(() => {
+    if (userStatus === "signed-in") navigate("/home");
+  }, [userStatus]);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
