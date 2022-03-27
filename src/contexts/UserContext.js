@@ -70,7 +70,7 @@ export const CurrentUserContext = ({ children }) => {
   const addPost = async (postText) => {
     const newUserPost = {
       post: postText,
-      name: userDetails.displayName,
+      name: userDetails.name,
       authorUID: userDetails.uid,
     };
     // TODO calls firebase method

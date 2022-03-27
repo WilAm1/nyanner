@@ -29,13 +29,6 @@ const GlobalStyles = createGlobalStyle`
 // *    Heart/Upvote liked tweets
 
 // * Working Log
-// ? Connect account to DB
-// * Add struture to /profile
-// * Add Delete button
-// * Guest functionality
-// * decouple FeedList
-// * Add custom hook
-// TODO Add author and img association later (optional)
 // TODO Refactor
 // TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed

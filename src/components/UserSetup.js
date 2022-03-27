@@ -6,8 +6,6 @@ import { UserContext } from "../contexts/UserContext";
 import { db } from "../firebase.config";
 
 function UserSetup() {
-  // TODO onSubmit, getAuth user details
-  // TODO Publish the new User to the db
   const [signUpDetails, setSignUpDetails] = useState({
     userName: "",
     name: "",
