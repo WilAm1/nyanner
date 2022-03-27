@@ -6,6 +6,7 @@ import Profile from "./components/Profile";
 import NavHOC from "./components/NavHOC";
 import IndexComponent from "./components/IndexComponent";
 import CurrentUserProfile from "./components/CurrentUserProfile";
+import withSignOutRedirect from "./components/withSignOutRedirect";
 
 const GlobalStyles = createGlobalStyle`
   *{
@@ -41,6 +42,8 @@ const GlobalStyles = createGlobalStyle`
 // TODO Style the rest
 
 function App() {
+  const HomeWithRedirect = withSignOutRedirect(<Home />);
+  const UserWithRedirect = withSignOutRedirect(<CurrentUserProfile />);
   return (
     <>
       <GlobalStyles />
@@ -48,8 +51,8 @@ function App() {
         <Route index element={<IndexComponent />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route element={<NavHOC />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<CurrentUserProfile />} />
+          <Route path="/home" element={<HomeWithRedirect />} />
+          <Route path="/profile" element={<UserWithRedirect />} />
           <Route path="/:id" element={<Profile />} />
         </Route>
         <Route path="*" element={<div>Not Found</div>} />
