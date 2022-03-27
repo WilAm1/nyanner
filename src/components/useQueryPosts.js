@@ -8,6 +8,7 @@ const useQueryPosts = (query) => {
   }
   const [feed, setFeed] = useState([]);
   useEffect(() => {
+    if (!q) setFeed([]);
     const unsubscribe = onSnapshot(
       q,
       (querySnapshot) => {

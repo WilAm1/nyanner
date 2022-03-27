@@ -57,7 +57,7 @@ function Profile() {
           <p>{email}</p>
         </div>
       </StyledProfileComponent>
-      {feed.length ? (
+      {!feed.length ? (
         <div>That user doesnt exist (lmao)</div>
       ) : (
         <FeedList posts={feed} />

@@ -6,6 +6,7 @@ import ComposeMessage from "./ComposeMessage";
 import FixedHeader from "../FixedHeader";
 import useQueryPosts from "../useQueryPosts";
 import styled from "styled-components";
+import FallbackComponent from "../FallbackComponent";
 
 const StyledFeed = styled.div`
   position: relative;
@@ -14,6 +15,8 @@ const StyledFeed = styled.div`
 function Home() {
   const { feed } = useQueryPosts(queryRecentPosts);
   const { addPost, userStatus } = useContext(UserContext);
+
+  if (userStatus === "signed-out") return <FallbackComponent />;
 
   return (
     <StyledFeed>

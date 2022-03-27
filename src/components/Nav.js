@@ -22,7 +22,7 @@ const StyledNav = styled.nav`
 `;
 
 function Nav() {
-  const { userDetails, handleSignOut } = useContext(UserContext);
+  const { userDetails, handleSignOut, userStatus } = useContext(UserContext);
   const { photoURL, displayName } = userDetails || {
     photoURL: "",
     displayName: "Signing out",
@@ -36,30 +36,34 @@ function Nav() {
     <StyledNav>
       <h2>Logo</h2>
       <h4>Explore</h4>
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-      </ul>
-      <section>
-        {/* <button>new message~nya</button> */}
-        <StyledProfile>
-          <div className="icon-wrapper">
-            <img
-              src={photoURL}
-              alt={"user-logo"}
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <div>
-            <p>{displayName}</p>
-            <button onClick={handleUserSignOut}>Logout</button>
-          </div>
-        </StyledProfile>
-      </section>
+      {userStatus !== "signed-out" && (
+        <>
+          <ul>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </ul>
+          <section>
+            {/* <button>new message~nya</button> */}
+            <StyledProfile>
+              <div className="icon-wrapper">
+                <img
+                  src={photoURL}
+                  alt={"user-logo"}
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <div>
+                <p>{displayName}</p>
+                <button onClick={handleUserSignOut}>Logout</button>
+              </div>
+            </StyledProfile>
+          </section>
+        </>
+      )}
     </StyledNav>
   );
 }

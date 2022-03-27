@@ -6,6 +6,8 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db, queryUserPosts } from "../firebase.config";
 import useQueryPosts from "./useQueryPosts";
 import ProfileFeed from "./ProfileFeed";
+import { useNavigate } from "react-router-dom";
+import FallbackComponent from "./FallbackComponent";
 const StyledCoverBanner = styled.div`
   width: 100%;
   background-color: #6bd562d6;
@@ -25,15 +27,19 @@ const StyledProfileComponent = styled.div`
 
 function CurrentUserProfile() {
   const { userDetails } = useContext(UserContext);
-  const { displayName, email, photoURL, uid } = userDetails;
   const { feed } = useQueryPosts(() => {
-    return queryUserPosts(uid);
+    if (!userDetails) return queryUserPosts("");
+    return queryUserPosts(userDetails.uid);
   });
 
   const handleClick = async (id) => {
     await deleteDoc(doc(db, "posts", id));
   };
 
+  // TODO Add fallback HOC copy this! also to HOME! revise home to remove conditional
+  if (!userDetails) return <FallbackComponent />;
+
+  const { displayName, email, photoURL } = userDetails;
   return (
     <section>
       <FixedHeader title={displayName} />
