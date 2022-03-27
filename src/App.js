@@ -39,6 +39,7 @@ const GlobalStyles = createGlobalStyle`
 // TODO Refactor
 // TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed
+// TODO Add Suspense on feed
 // TODO Style the rest
 
 function App() {
