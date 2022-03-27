@@ -36,7 +36,7 @@ function Nav() {
     <StyledNav>
       <h2>Logo</h2>
       <h4>Explore</h4>
-      {userStatus !== "signed-out" && (
+      {userStatus === "signed-in" && (
         <>
           <ul>
             <li>
@@ -46,24 +46,24 @@ function Nav() {
               <Link to="/profile">Profile</Link>
             </li>
           </ul>
-          <section>
-            {/* <button>new message~nya</button> */}
-            <StyledProfile>
-              <div className="icon-wrapper">
-                <img
-                  src={photoURL}
-                  alt={"user-logo"}
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-              <div>
-                <p>{displayName}</p>
-                <button onClick={handleUserSignOut}>Logout</button>
-              </div>
-            </StyledProfile>
-          </section>
         </>
       )}
+      <section>
+        {/* <button>new message~nya</button> */}
+        <StyledProfile>
+          <div className="icon-wrapper">
+            <img
+              src={photoURL}
+              alt={"user-logo"}
+              referrerPolicy="no-referrer"
+            />
+          </div>
+          <div>
+            <p>{displayName}</p>
+            <button onClick={handleUserSignOut}>Logout</button>
+          </div>
+        </StyledProfile>
+      </section>
     </StyledNav>
   );
 }
