@@ -1,12 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import {
-  db,
+  checkUserExist,
+  fetchUserDetail,
   publishUserPost,
   signInUser,
   signOutUser,
 } from "../firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, doc } from "firebase/firestore";
 
 export const UserContext = createContext("something");
 
@@ -14,17 +14,29 @@ export const CurrentUserContext = ({ children }) => {
   const [userDetails, setUserDetails] = useState();
   const [userStatus, setUserStatus] = useState("signed-out");
 
+  const handleDBUser = async ({ uid, photoURL, email }) => {
+    // const { displayName, email, photoURL, uid } = user;
+    const dbUserDetail = await fetchUserDetail(uid);
+    if (!dbUserDetail) {
+      setUserStatus("new-user");
+      // setUserDetails({ photoURL, email });
+    } else {
+      setUserDetails(dbUserDetail);
+      if (userStatus !== "sign-in") {
+        setUserStatus("signed-in");
+      }
+    }
+  };
+
   useEffect(() => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("iran");
-        const { displayName, email, photoURL, uid } = user;
-        // TODO get the user ref on db here.
-        setUserDetails({ displayName, email, photoURL, uid });
-        if (userStatus !== "sign-in") {
-          setUserStatus("signed-in");
-        }
+        // TODO Check if user id is already on the database
+        // TODO If yes, proceed to setUserDetails
+        // TODO if Not, Redirect to UserSetup
+        // TODO After checking if it was written, proceed to setUserDetails
+        handleDBUser(user);
       } else {
         setUserStatus("signed-out");
       }

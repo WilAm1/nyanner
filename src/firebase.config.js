@@ -11,6 +11,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getFirestore,
   orderBy,
   query,
@@ -69,12 +70,24 @@ export const signOutUser = async () => {
   return result;
 };
 
+// export const checkUserExist = async (id)=>{
+//   const ref = doc(db,'users',id);
+//   const res = await getDoc(ref);
+//   return res.exists();
+// }
+
+export const fetchUserDetail = async (id) => {
+  const ref = doc(db, "users", id);
+  const res = await getDoc(ref);
+  if (res.exists()) {
+    return res.data();
+  }
+  return null;
+};
+
 export const signInUser = async () => {
   signInWithPopup(getAuth(), provider)
     .then((result) => {
-      // // This gives you a Google Access Token. You can use it to access the Google API.
-      // const credential = GoogleAuthProvider.credentialFromResult(result);
-      // const token = credential.accessToken;
       const user = result.user;
       const { uid: id, displayName: name, photoURL } = user;
       setDoc(

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import UserSetup from "./UserSetup";
 
 function SignIn() {
   const { handleSignIn, userStatus, handleGuestSignIn } =
@@ -21,10 +22,15 @@ function SignIn() {
   //* Redirects if already signed in
   useEffect(() => {
     console.log("Sign in ", userStatus);
+
     if (userStatus === "signed-in" || userStatus === "guest") {
       navigate("/home");
     }
   }, [userStatus]);
+
+  if (userStatus === "new-user") {
+    return <UserSetup />;
+  }
 
   return (
     <div>

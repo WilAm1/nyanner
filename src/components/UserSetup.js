@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 function UserSetup() {
+  // TODO onSubmit, getAuth user details
+  // TODO Publish the new User to the db
   const [signUpDetails, setSignUpDetails] = useState({
     userName: "",
     name: "",
