@@ -27,6 +27,7 @@ function ComposeMessage({ handleNewPost }) {
           placeholder="Nyaa~"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          required
         ></textarea>
         <button type="submit">Post~nya</button>
       </StyledComposeMessage>

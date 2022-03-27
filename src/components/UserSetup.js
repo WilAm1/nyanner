@@ -26,7 +26,10 @@ function UserSetup() {
     if (currentUser) {
       const { uid, email, photoURL } = currentUser;
       console.log(currentUser);
-      await setDoc(doc(db, "users", uid), {
+      await setDoc(doc(db, "google-users", currentUser.uid), {
+        userName: signUpDetails.userName,
+      });
+      await setDoc(doc(db, "users", signUpDetails.userName), {
         uid,
         email,
         photoURL,
@@ -36,7 +39,7 @@ function UserSetup() {
       navigate("/home");
     }
   };
-
+  // TODO Add form handler on userName
   return (
     <div>
       <form onSubmit={handleSubmit}>

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 
-import { FirebaseError, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -12,7 +12,9 @@ import {
   collection,
   doc,
   getDoc,
+  getDocs,
   getFirestore,
+  limit,
   orderBy,
   query,
   serverTimestamp,
@@ -54,7 +56,7 @@ export const queryRecentPosts = query(
 );
 
 export const queryUserPosts = (id) =>
-  query(collection(db, "posts"), where("authorUID", "==", id));
+  query(collection(db, "posts"), where("userName", "==", id));
 
 export const publishUserPost = async (post) => {
   console.log(post);
@@ -78,10 +80,14 @@ export const signOutUser = async () => {
 // }
 
 export const fetchUserDetail = async (id) => {
-  const ref = doc(db, "users", id);
+  console.log(id);
+  const ref = doc(db, "google-users", id);
   const res = await getDoc(ref);
   if (res.exists()) {
-    return res.data();
+    const { userName } = res.data();
+    const profileRef = doc(db, "users", userName);
+    const profileData = await getDoc(profileRef);
+    return profileData.data();
   }
   return null;
 };

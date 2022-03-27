@@ -15,6 +15,7 @@ export const CurrentUserContext = ({ children }) => {
 
   const handleDBUser = async ({ uid, photoURL, email }) => {
     // const { displayName, email, photoURL, uid } = user;
+    console.log(uid);
     const dbUserDetail = await fetchUserDetail(uid);
     if (!dbUserDetail) {
       setUserStatus("new-user");
@@ -72,6 +73,7 @@ export const CurrentUserContext = ({ children }) => {
       post: postText,
       name: userDetails.name,
       authorUID: userDetails.uid,
+      userName: userDetails.userName,
     };
     // TODO calls firebase method
     publishUserPost(newUserPost);

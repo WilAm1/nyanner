@@ -27,7 +27,7 @@ function CurrentUserProfile() {
   const { userDetails } = useContext(UserContext);
   const { feed } = useQueryPosts(() => {
     if (!userDetails) return queryUserPosts("");
-    return queryUserPosts(userDetails.uid);
+    return queryUserPosts(userDetails.userName);
   });
 
   const handleClick = async (id) => {
