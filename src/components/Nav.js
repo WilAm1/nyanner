@@ -34,6 +34,7 @@ function Nav() {
     await handleSignOut();
     navigate("/sign-in");
   };
+  console.log(photoURL);
   return (
     <StyledNav>
       <Logo />
