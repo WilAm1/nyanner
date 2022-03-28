@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
-
+import Logo from "./Logo";
 const StyledProfile = styled.div`
   display: flex;
   .icon-wrapper {
@@ -18,7 +18,9 @@ const StyledProfile = styled.div`
 const StyledNav = styled.nav`
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 1rem;
+  background-color: #000000;
+  color: white;
 `;
 
 function Nav() {
@@ -34,7 +36,7 @@ function Nav() {
   };
   return (
     <StyledNav>
-      <h2>Logo</h2>
+      <Logo />
       <h4>Explore</h4>
       {userStatus === "signed-in" && (
         <>

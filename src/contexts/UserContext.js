@@ -6,6 +6,7 @@ import {
   signOutUser,
 } from "../firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import GuestIcon from "../components/GuestProfileIcon";
 
 export const UserContext = createContext("something");
 
@@ -67,7 +68,7 @@ export const CurrentUserContext = ({ children }) => {
     setUserDetails({
       displayName: "Guest",
       email: "guestNyan@gmail.com",
-      photoURL: null,
+      photoURL: <GuestIcon />,
       uid: "guest",
     });
   };

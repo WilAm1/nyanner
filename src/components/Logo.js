@@ -7,8 +7,8 @@ const StyledLogo = styled.img`
   filter: invert(100%);
 `;
 
-function Logo() {
-  return <StyledLogo src={catLogo} alt="logo" />;
+function Logo({ className }) {
+  return <StyledLogo className={className} src={catLogo} alt="logo" />;
 }
 
 export default Logo;

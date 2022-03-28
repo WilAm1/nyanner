@@ -53,7 +53,6 @@ const SubheadingText = styled.h3`
 
 const BigLogo = styled(Logo)`
   width: 20rem;
-  filter: invert(100%);
 `;
 
 function SignIn() {
