@@ -35,7 +35,7 @@ const StyledOr = styled.div`
 
 const AccentButton = styled(Button)`
   background-color: #1d9bf0;
-  color: #ddf0fd;
+  color: #fff;
 `;
 
 const MainSection = styled.div`

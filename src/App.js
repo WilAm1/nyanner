@@ -14,10 +14,14 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     box-sizing:inherit;
   }
+  html{
+    height: 100%;
+  }
   body{
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #eee;
+    min-height: 100vh;
   }
 `;
 
