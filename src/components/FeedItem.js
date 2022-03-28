@@ -4,6 +4,34 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { db } from "../firebase.config";
 
+const StyledListItem = styled.li`
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  grid-template-rows: 1fr 1rem;
+  border: 1px solid grey;
+  padding: 1rem;
+  background-color: #000000;
+  color: white;
+  .img-wrapper {
+    width: 3.5rem;
+    height: 4rem;
+    img {
+      object-fit: contain;
+      width: 100%;
+      border-radius: 100%;
+    }
+  }
+  .user-name {
+    margin: 0 1rem;
+    opacity: 0.7;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+    font-weight: 800;
+  }
+`;
+
 function FeedItem({ post: feedPost, children }) {
   const { post, dateCreated, userName } = feedPost;
   const [profileDetails, setProfileDetails] = useState({
@@ -24,22 +52,25 @@ function FeedItem({ post: feedPost, children }) {
   }, []);
 
   return (
-    <li>
-      <div>
+    <StyledListItem>
+      <div className="img-wrapper">
         <img
           referrerPolicy="no-referrer"
           src={profileDetails.photoURL}
           alt="user-icon"
         />
-        <p>{profileDetails.name}</p>
-        <Link to={`/${profileDetails.userName}`}>
-          @{profileDetails.userName}
-        </Link>
       </div>
-      <p>{post}</p>
-      <p>{dateCreated.toDate().toDateString()}</p>
+      <div>
+        <p>
+          {" "}
+          <Link to={`/${profileDetails.userName}`}>{profileDetails.name}</Link>
+          <span className="user-name">@{profileDetails.userName}</span>
+          {dateCreated.toDate().toDateString()}
+        </p>
+        <p>{post}</p>
+      </div>
       {children}
-    </li>
+    </StyledListItem>
   );
 }
 

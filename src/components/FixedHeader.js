@@ -6,6 +6,9 @@ const StyledFixedHeader = styled.section`
   top: 0;
   left: 0;
   width: 100%;
+  padding: 1rem;
+  background-color: black;
+  color: white;
 `;
 function FixedHeader({ title }) {
   return (

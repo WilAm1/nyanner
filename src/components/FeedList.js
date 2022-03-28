@@ -1,14 +1,18 @@
 import React from "react";
 import FeedItem from "./FeedItem";
+import styled from "styled-components";
 
+const StyledUL = styled.ul`
+  list-style: none;
+`;
 function FeedList({ posts }) {
   return (
     <section>
-      <ul>
+      <StyledUL>
         {posts.map((post) => {
           return <FeedItem key={post.id} post={post} />;
         })}
-      </ul>
+      </StyledUL>
     </section>
   );
 }
