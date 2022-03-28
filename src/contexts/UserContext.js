@@ -66,7 +66,8 @@ export const CurrentUserContext = ({ children }) => {
     console.log("userContext comp", userStatus);
     setUserStatus("guest");
     setUserDetails({
-      displayName: "Guest",
+      name: "Guest",
+      userName: "guest01",
       email: "guestNyan@gmail.com",
       photoURL: guestIcon,
       uid: "guest",

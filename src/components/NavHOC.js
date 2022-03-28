@@ -6,6 +6,7 @@ import styled from "styled-components";
 const GridLayout = styled.div`
   display: grid;
   grid-template-columns: 20vw 1fr 15vw;
+  min-height: 100vh;
 `;
 
 function NavHOC() {
