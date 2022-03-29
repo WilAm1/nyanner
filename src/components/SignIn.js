@@ -8,13 +8,13 @@ import Logo from "./Logo";
 const StyledDivider = styled.section`
   display: flex;
   min-height: 100vh;
-  background-color: #000000;
-  color: white;
+  background-color: #f5f5f5;
+  color: #364f6b;
 `;
 
 const StyledPoster = styled.div`
   width: 50vw;
-  background-color: #0f9afa;
+  background-color: #3fc1c9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@ const StyledOr = styled.div`
 `;
 
 const AccentButton = styled(Button)`
-  background-color: #1d9bf0;
+  background-color: #fc5185;
   color: #fff;
 `;
 

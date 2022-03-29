@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
   body{
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #eee;
+    background-color: #F5F5F5;
     min-height: 100vh;
   }
 `;

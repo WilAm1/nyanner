@@ -10,8 +10,8 @@ const StyledListItem = styled.li`
   grid-template-rows: 1fr 1rem;
   border: 1px solid grey;
   padding: 1rem;
-  background-color: #000000;
-  color: white;
+  color: #364f6b;
+  background-color: #f5f5f5;
   .img-wrapper {
     width: 3.5rem;
     height: 4rem;
@@ -27,7 +27,7 @@ const StyledListItem = styled.li`
   }
   a {
     text-decoration: none;
-    color: white;
+    color: #364f6b;
     font-weight: 800;
   }
 `;

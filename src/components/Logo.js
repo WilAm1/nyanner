@@ -4,7 +4,6 @@ import catLogo from "../catSVG.svg";
 
 const StyledLogo = styled.img`
   width: 2rem;
-  filter: invert(100%);
 `;
 
 function Logo({ className }) {

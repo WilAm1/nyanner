@@ -7,8 +7,9 @@ const StyledFixedHeader = styled.section`
   left: 0;
   width: 100%;
   padding: 1rem;
-  background-color: black;
-  color: white;
+  background-color: #364f6b;
+  color: #f5f5f5;
+  opacity: 0.9;
 `;
 function FixedHeader({ title }) {
   return (

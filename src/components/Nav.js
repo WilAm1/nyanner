@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
+import { Button } from "../styles/Button";
 import Logo from "./Logo";
 const StyledProfile = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const StyledProfile = styled.div`
 `;
 const StyledNav = styled.nav`
   position: relative;
-  background-color: gray;
+  background-color: #3fc1c9;
 `;
 const FixedPositionNav = styled.div`
   display: flex;
@@ -42,6 +43,20 @@ const StyledSignInList = styled.ul`
     color: white;
   }
 `;
+
+const StyledSignOutButton = styled(Button)`
+  background-color: transparent;
+  width: 5rem;
+  color: white;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    border: 1px solid #364f6b;
+    background-color: #fc5185;
+    color: #f5f5f5;
+    text-decoration: underline;
+  }
+`;
+
 function Nav() {
   const { userDetails, handleSignOut, userStatus } = useContext(UserContext);
   const { photoURL, name, userName } = userDetails || {
@@ -54,7 +69,7 @@ function Nav() {
     await handleSignOut();
     navigate("/sign-in");
   };
-  console.log(photoURL);
+
   return (
     <StyledNav>
       <FixedPositionNav>
@@ -83,7 +98,9 @@ function Nav() {
             <div>
               <p>{name}</p>
               <p>@{userName}</p>
-              <button onClick={handleUserSignOut}>Logout</button>
+              <StyledSignOutButton onClick={handleUserSignOut}>
+                Logout
+              </StyledSignOutButton>
             </div>
           </StyledProfile>
         </section>
