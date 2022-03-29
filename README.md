@@ -1,4 +1,24 @@
-# Getting Started with Create React App
+# Nyanner
+
+A barebone Twitter clone
+
+> Javascript Final Project based from [TOP](https://www.theodinproject.com/lessons/javascript-javascript-final-project)
+
+## What have I learned:
+
+- Simple relationships in nosql firestore database
+- Organizing links with `react-router`
+- React context API
+- React custom hooks
+- `styled-components` inheritance and code splitting
+
+## Things to look forward in the future
+
+- `Great Refactor`
+- Likes and comment
+- Themes
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
