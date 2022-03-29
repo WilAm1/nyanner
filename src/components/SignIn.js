@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UserSetup from "./UserSetup";
 import styled from "styled-components";
 import { Button } from "../styles/Button";
-import Logo from "./Logo";
+import Logo from "../styles/Logo";
 const StyledDivider = styled.section`
   display: flex;
   min-height: 100vh;
@@ -62,18 +62,18 @@ function SignIn() {
 
   const handleLoginClick = (e) => {
     e.preventDefault();
-    console.log("I tried to login to google!");
+    // console.log("I tried to login to google!");
     handleSignIn();
   };
 
   const handleGuestClick = () => {
-    console.log("I tried to login as a guest!");
+    // console.log("I tried to login as a guest!");
     handleGuestSignIn();
   };
 
   //* Redirects if already signed in
   useEffect(() => {
-    console.log("Sign in ", userStatus);
+    // console.log("Sign in ", userStatus);
 
     if (userStatus === "signed-in" || userStatus === "guest") {
       navigate("/home");

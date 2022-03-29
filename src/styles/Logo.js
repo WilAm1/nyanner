@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import catLogo from "../catSVG.svg";
+import catLogo from "../assets/svg/catSVG.svg";
 
 const StyledLogo = styled.img`
   width: 2rem;

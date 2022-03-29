@@ -39,14 +39,13 @@ function FeedItem({ post: feedPost, children }) {
     name: "loading",
   });
   useEffect(() => {
-    console.log(userName);
     const ref = doc(db, "users", userName);
     getDoc(ref).then((d) => {
-      console.log(d.data());
+      // console.log(d.data());
 
       if (d.exists()) {
         setProfileDetails(d.data());
-        console.log(d.data);
+        // console.log(d.data);
       }
     });
   }, []);

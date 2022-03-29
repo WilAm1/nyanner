@@ -6,7 +6,7 @@ import {
   signOutUser,
 } from "../firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import guestIcon from "../guestIcon.svg";
+import guestIcon from "../assets/svg/guestIcon.svg";
 
 export const UserContext = createContext("something");
 
@@ -16,7 +16,7 @@ export const CurrentUserContext = ({ children }) => {
 
   const handleDBUser = async ({ uid, photoURL, email }) => {
     // const { displayName, email, photoURL, uid } = user;
-    console.log(uid);
+    //console.log(uid);
     const dbUserDetail = await fetchUserDetail(uid);
     if (!dbUserDetail) {
       setUserStatus("new-user");
@@ -37,10 +37,6 @@ export const CurrentUserContext = ({ children }) => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // TODO Check if user id is already on the database
-        // TODO If yes, proceed to setUserDetails
-        // TODO if Not, Redirect to UserSetup
-        // TODO After checking if it was written, proceed to setUserDetails
         handleDBUser(user);
       } else {
         setUserStatus("signed-out");
@@ -63,7 +59,7 @@ export const CurrentUserContext = ({ children }) => {
   };
 
   const handleGuestSignIn = () => {
-    console.log("userContext comp", userStatus);
+    // console.log("userContext comp", userStatus);
     setUserStatus("guest");
     setUserDetails({
       name: "Guest",

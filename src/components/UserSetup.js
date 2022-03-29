@@ -21,7 +21,7 @@ function UserSetup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(signUpDetails);
+    // console.log(signUpDetails);
     const { currentUser } = getAuth();
     if (currentUser) {
       const { uid, email, photoURL } = currentUser;

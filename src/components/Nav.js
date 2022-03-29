@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
 import { Button } from "../styles/Button";
-import Logo from "./Logo";
+import Logo from "../styles/Logo";
 const StyledProfile = styled.div`
   display: flex;
   gap: 2rem;
@@ -62,8 +62,8 @@ function Nav() {
   const { userDetails, handleSignOut, userStatus } = useContext(UserContext);
   const { photoURL, name, userName } = userDetails || {
     photoURL: "",
-    name: "Signing out",
-    userName: "loading",
+    name: "No User",
+    userName: "please sign in",
   };
   const navigate = useNavigate();
   const handleUserSignOut = async () => {

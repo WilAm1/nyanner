@@ -29,15 +29,14 @@ const GlobalStyles = createGlobalStyle`
 // ?    Sign In / Sign Out
 // ?    Able to read,write,edit, and delete own tweets
 // ?    Display the recent posts
-//    * Have recent posts on top when new posts arrived...
-// *    Heart/Upvote liked tweets
+// ?    Have recent posts on top when new posts arrived...
 
 // * Working Log
-// TODO Style the rest
 // TODO Refactor
 // TODO Fetch data on scroll. Only fetch on the fly
 // TODO Paginate data on feed
 // TODO Add Suspense on feed
+// TODO Heart/Upvote liked tweets
 
 function App() {
   const HomeWithRedirect = withSignOutRedirect(<Home />);
