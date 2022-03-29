@@ -6,6 +6,7 @@ import { Button } from "../styles/Button";
 import Logo from "./Logo";
 const StyledProfile = styled.div`
   display: flex;
+  gap: 2rem;
   .icon-wrapper {
     width: 4rem;
     height: 4rem;
