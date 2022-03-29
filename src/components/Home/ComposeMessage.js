@@ -3,14 +3,23 @@ import styled from "styled-components";
 
 const StyledComposeMessage = styled.form`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1rem;
-  align-items: flex-start;
-  & > * {
-    width: 50%;
-  }
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid #364f6b;
 `;
-
+const StyledTextArea = styled.textarea`
+  resize: none;
+  flex: 1;
+`;
+const StyledSubmitButton = styled.button`
+  padding: 0.5rem;
+  background-color: #fc5185;
+  color: #f5f5f5;
+  border: 1px solid #364f6b;
+  border-radius: 5px;
+`;
 function ComposeMessage({ handleNewPost }) {
   const [text, setText] = useState("");
 
@@ -21,17 +30,15 @@ function ComposeMessage({ handleNewPost }) {
   };
 
   return (
-    <div>
-      <StyledComposeMessage onSubmit={handleSubmit}>
-        <textarea
-          placeholder="Nyaa~"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-          required
-        ></textarea>
-        <button type="submit">Post~nya</button>
-      </StyledComposeMessage>
-    </div>
+    <StyledComposeMessage onSubmit={handleSubmit}>
+      <StyledTextArea
+        placeholder="Nyaa~"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        required
+      ></StyledTextArea>
+      <StyledSubmitButton type="submit">Post~nya</StyledSubmitButton>
+    </StyledComposeMessage>
   );
 }
 
